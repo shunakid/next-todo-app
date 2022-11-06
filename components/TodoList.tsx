@@ -12,6 +12,9 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+
+import { useRecoilState } from "recoil";
+import todosState from "../atoms/todos";
 import Link from "next/link";
 
 type Todo = {
@@ -22,7 +25,7 @@ type Todo = {
 };
 
 const TodoList = () => {
-  const [todos, setTodos] = React.useState<Todo[]>([]);
+  const [todos, setTodos] = useRecoilState<Todo[]>(todosState);
   const { user } = useAuth();
   const toast = useToast();
 
@@ -78,7 +81,7 @@ const TodoList = () => {
               _hover={{ boxShadow: "sm" }}
             >
               <Heading as="h3" fontSize={"xl"}>
-                {todo.title}{" "}
+                <Link href={`/todos/${todo.id}`}>{todo.title}</Link>
                 <Badge
                   color="red.500"
                   bg="inherit"
