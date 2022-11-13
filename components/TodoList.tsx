@@ -7,10 +7,14 @@ import { deleteTodo, toggleTodoStatus } from "../api/todo";
 import {
   Badge,
   Box,
+  Button,
   Heading,
   SimpleGrid,
   Text,
   useToast,
+  Flex,
+  ButtonGroup,
+  Spacer,
 } from "@chakra-ui/react";
 
 import { useRecoilState } from "recoil";
@@ -81,7 +85,7 @@ const TodoList = () => {
               _hover={{ boxShadow: "sm" }}
             >
               <Heading as="h3" fontSize={"xl"}>
-                <Link href={`/todos/${todo.id}`}>{todo.title}</Link>
+                {todo.title}
                 <Badge
                   color="red.500"
                   bg="inherit"
@@ -119,6 +123,17 @@ const TodoList = () => {
                 </Badge>
               </Heading>
               <Text>{todo.description}</Text>
+              <Flex minWidth="max-content" alignItems="center" gap="2">
+                <Spacer />
+                <ButtonGroup gap="0">
+                  <Button colorScheme="teal" size="xs">
+                    <Link href={`/todos/${todo.id}`}>詳細</Link>
+                  </Button>
+                  <Button colorScheme="teal" size="xs">
+                    <Link href={`/todos/${todo.id}/edit`}>編集</Link>
+                  </Button>
+                </ButtonGroup>
+              </Flex>
             </Box>
           ))}
       </SimpleGrid>
